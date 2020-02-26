@@ -63,8 +63,6 @@ Plug 'airblade/vim-gitgutter'
 "tmux
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'jmcantrell/vim-virtualenv'
-Plug 'integralist/vim-mypy'
-
 "tmux
 " Initialize plugin system
 call plug#end()
