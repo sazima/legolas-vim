@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
 "           personal plugin start           "
 """""""""""""""""""""""""""""""""""""""""""""
 " async syntax checking plugin for Vim
-Plug 'w0rp/ale', {'tag': 'b934dc5'}
+Plug 'w0rp/ale'
 
 " Highlights trailing whitespace in red and provides
 Plug 'bronson/vim-trailing-whitespace'
@@ -32,7 +32,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " show venv、git branch、file
 " Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plug 'vim-airline/vim-airline', {'tag': '7190164'}
 Plug 'vim-airline/vim-airline-themes'
 
 " enhance za
@@ -61,6 +60,12 @@ Plug 'tpope/vim-fugitive'
 " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
 Plug 'airblade/vim-gitgutter'
 
+"tmux
+Plug 'christoomey/vim-tmux-navigator'
+" Plug 'jmcantrell/vim-virtualenv'
+Plug 'integralist/vim-mypy'
+
+"tmux
 " Initialize plugin system
 call plug#end()
 filetype plugin indent on
@@ -100,16 +105,6 @@ fun! <SID>StripTrailingWhitespaces()
     endfun
 autocmd FileType * autocmd BufWritePre <buffer> :call <SID>StripTrailingWhitespaces()
 
-" syntastic
-let &runtimepath.=',~/.vim/plugged/ale'
-let g:ale_sign_column_always = 0 " 一般需要实时检查，默认关闭
-let g:ale_lint_on_save = 1 " save file auto check
-let g:ale_lint_on_text_changed = 0 " for ale_lint_on_save = 1
-let g:ale_lint_on_enter = 0 " for ale_lint_on_save = 1
-map <F6> :ALEToggle \| echo 'g:ale_enabled =' g:ale_enabled<CR>
-let g:ale_echo_msg_error_str = 'Error'
-let g:ale_echo_msg_warning_str = 'Warning'
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
@@ -162,17 +157,17 @@ augroup END
 autocmd FileType make set noexpandtab
 
 "python with virtualenv support
-if has('python3')
-  silent! python3 1
-endif
-py3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
-EOF
+" if has('python3')
+"   silent! python3 1
+" endif
+" py3 << EOF
+" import os
+" import sys
+" if 'VIRTUAL_ENV' in os.environ:
+"   project_base_dir = os.environ['VIRTUAL_ENV']
+"   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"   exec(compile(open(activate_this, "rb").read(), activate_this, 'exec'), dict(__file__=activate_this))
+" EOF
 
 " Ctrl-j 切换到下方的分割窗口 - Ctrl-k 切换到上方的分割窗口 - Ctrl-l
 " 切换到右侧的分割窗口 - Ctrl-h 切换到左侧的分割窗口
@@ -277,3 +272,15 @@ vnoremap <S-Tab> <gv
 
 " override with your local vimrc
 so ~/.vimrc.local
+
+ " syntastic
+let g:ale_fix_on_save = 0
+let g:ale_completion_enabled = 1
+let g:ale_sign_column_always = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_linters = {
+\   'c++': ['clang'],
+\   'c': ['clang'],
+\   'python': ['pylint'],
+\}

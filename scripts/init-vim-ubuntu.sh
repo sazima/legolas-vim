@@ -19,8 +19,8 @@ sudo apt-get install -y golang
 echoo ">>> Remove vim if you have it already ..."
 sudo apt-get remove -y vim vim-runtime gvim
 
-echoo ">>> Install vim ..."
-cd ~ && rm -rf vim && git clone https://github.com/vim/vim.git && cd vim && git checkout v8.2.0114
+echoo ">>> Install vim ubuntu ..."
+cd ~ && rm -rf vim_vim && git clone --branch v8.2.0114 --depth 1 https://gitee.com/zhenguozhao/vim_vim.git  && cd vim_vim
 ./configure --with-features=huge \
     --enable-multibyte \
     --enable-rubyinterp=yes \
