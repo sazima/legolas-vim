@@ -282,3 +282,9 @@ let g:ale_linters = {
 \   'c': ['clang'],
 \   'python': ['pylint'],
 \}
+
+
+" ctrl p
+"\
+let g:ctrlp_map = ',e'
+
