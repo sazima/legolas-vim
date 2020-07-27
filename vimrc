@@ -123,6 +123,7 @@ let g:ycm_python_binary_path = 'python3'
 map <C-G>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "  fix .cpp error: ValueError: Still no compile flags, no completions yet.
 let g:ycm_global_ycm_extra_conf = '~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
 " Vim's autocomplete is excruciatingly slow
 " http://stackoverflow.com/questions/2169645/vims-autocomplete-is-excruciatingly-slow
 set complete-=i
@@ -286,5 +287,7 @@ let g:ale_linters = {
 
 " ctrl p
 "\
+" let g:ctrlp_working_path_mode = 'ra'
+let $PYTHONPATH .= getcwd()
+let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_map = ',e'
-
